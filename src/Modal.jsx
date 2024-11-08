@@ -1,12 +1,33 @@
-import React,{useState}from 'react'
+import React,{useState,useEffect}from 'react'
 import './Modal.css'
 
-function Modal({onClose}) {
+function Modal({onClose,handleCreate}) {
+    const [groups, setGroups] = useState([]);
     const [groupName, setGroupName] = useState('');
     const [color, setColor] = useState('');
 
-    const handleCreate = ()=>{
-      console.log("Group Created:",{groupName},", Color:",{color});
+    useEffect(() => {
+      const storedGroups = JSON.parse(localStorage.getItem('groups')) || [];
+    
+      setGroups(storedGroups);
+    }, []);
+  
+    // Save groups to local storage whenever groups change
+    useEffect(() => {
+      if (groups.length > 0){
+      localStorage.setItem('groups', JSON.stringify(groups));
+      console.log("Groups saved to local storage:", groups);
+      }
+    }, [groups]);
+
+    const handleSubmit = (e)=>{
+      e.preventDefault();
+      if (groupName.trim() === "") return;
+      const newGroup = { name: groupName, color: color };
+      handleCreate(newGroup);
+     
+      setGroupName('');
+      setColor('#000000');
       onClose();
 
     }
@@ -35,7 +56,7 @@ function Modal({onClose}) {
             ))}
          </div>
          <div className="create-button">
-         <button onClick={handleCreate}>Create</button>
+         <button onClick={handleSubmit}>Create</button>
          </div>
     </div>
     </div>
