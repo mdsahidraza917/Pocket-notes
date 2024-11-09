@@ -3,12 +3,17 @@ import './Sidebar.css'
 import Modal from './Modal';
 import plusIcon from '../src/assets/add-icon.png'
 
-function Sidebar() {
+function Sidebar({ onSelectGroup,selectedGroupColor}) {
   const [groups, setGroups] = useState([]);
   const [showModal,setShowModel] = useState(false);
   const modalRef = useRef(null);
   
-
+  const handleGroupClick = (group) => {
+    console.log(group.name)
+    console.log(group.color)
+    onSelectGroup(group.name);
+    selectedGroupColor(group.color) ;// Pass the group name to the parent
+  };
 
   const handleClickOutside = (event) => {
     if (modalRef.current && !modalRef.current.contains(event.target)) {
@@ -64,7 +69,10 @@ function Sidebar() {
       <div className="sidebar-content">
         <ul className="group-list">
         {groups.map((group, index) => (
-          <li key={index} className="group-item">
+          <li 
+          key={index} 
+          className="group-item"
+          onClick={()=> handleGroupClick(group)}>
             <div
               className="group-icon"
               style={{ backgroundColor: group.color }}

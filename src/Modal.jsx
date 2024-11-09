@@ -31,6 +31,7 @@ function Modal({onClose,handleCreate}) {
       onClose();
 
     }
+    const isButtonEnabled = groupName.trim() !== '' && color !== '';
   return (
     <div className='modal-overlay'>
       <div className="modal">
@@ -56,7 +57,9 @@ function Modal({onClose,handleCreate}) {
             ))}
          </div>
          <div className="create-button">
-         <button onClick={handleSubmit}>Create</button>
+         <button onClick={handleSubmit} disabled={!isButtonEnabled} className={!isButtonEnabled ? 'disabled-button' : ''}>
+         Create
+         </button>
          </div>
     </div>
     </div>

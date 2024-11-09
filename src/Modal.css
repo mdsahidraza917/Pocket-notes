@@ -57,12 +57,21 @@
     display: flex;
     justify-content: flex-end;
 }  
-button{
+.create-button button.disabled-button {
+  background-color: #ccc;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+.create-button button{
+  cursor: pointer;
   color: white;
   width: 100px;
   height: 100%;
   background-color:#001F8B ;
   font-size: 15px; 
+}
+.create-button button:hover:not(.disabled-button) {
+  background-color: #0036b3;
 }
 h3{
 color: black;
