@@ -72,6 +72,12 @@
     align-items: center;
     margin-bottom: 25px;
   }
+  .group-item.selected {
+    background-color: #d3e3ff; /* Light background for selected item */
+    border-radius: 8px;
+    border-top-left-radius:50px ;
+    border-bottom-left-radius: 50px;
+  }
   
   .group-icon {
     width: 50px;

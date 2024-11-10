@@ -26,7 +26,7 @@ function MainContent({selectedGroup,notes,addNote,selectedGroupColor}) {
   };
   const isButtonEnabled = newNote.trim() !== '';
   return (
-<div className="main-content-container">
+<div className="main-content-container " >
       {console.log(selectedGroup)}
       {selectedGroup ? (
         // Display notes for the selected group

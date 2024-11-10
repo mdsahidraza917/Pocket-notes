@@ -8,6 +8,12 @@
   overflow: hidden;
 
 }
+.main-content-container.selected {
+  background-color: #6691FF; /* Customize color as desired */
+  color: white;
+  font-weight: bold;
+  border-radius: 5px;
+}
 .main-content-empty{
   flex: 1; 
   display: flex;
@@ -61,7 +67,6 @@
   background-color: #001F8B;
   display: flex;
   align-items: center;
-  z-index: 1;
 }
 .group-title{
   font-size: 22px;
@@ -108,7 +113,7 @@ resize: none; /* Prevent resizing to keep layout consistent */
 font-size: 16px;
 margin: 20px;
 border-radius: 9px;
-color: #888888; /* Light gray color */
+color: #9A9A9A; /* Light gray color */
 padding: 10px;
 }
 
@@ -136,9 +141,6 @@ color: #9A9A9A;
   justify-content: center;
   padding: 0;
   outline: none;
-}
-.note-input button:hover:not(.disabled-button) {
-  background-color: #0036b3;
 }
 .note-input button img{
   cursor: pointer;

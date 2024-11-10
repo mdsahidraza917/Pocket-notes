@@ -6,32 +6,20 @@ import plusIcon from '../src/assets/add-icon.png'
 function Sidebar({ onSelectGroup,selectedGroupColor}) {
   const [groups, setGroups] = useState([]);
   const [showModal,setShowModel] = useState(false);
+  const [selectedGroupName, setSelectedGroupName] = useState('');
   const modalRef = useRef(null);
   
   const handleGroupClick = (group) => {
     console.log(group.name)
     console.log(group.color)
+    setSelectedGroupName(group.name);
     onSelectGroup(group.name);
     selectedGroupColor(group.color) ;// Pass the group name to the parent
   };
 
-  const handleClickOutside = (event) => {
-    if (modalRef.current && !modalRef.current.contains(event.target)) {
-      setShowModel(false);
-    }
-  };
 
-  useEffect(() => {
-    if (showModal) {
-      document.addEventListener("mousedown", handleClickOutside);
-    } else {
-      document.removeEventListener("mousedown", handleClickOutside);
-    }
 
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [showModal]);
+ 
   useEffect(() => {
     const storedGroups = JSON.parse(localStorage.getItem('groups')) || [];
   
@@ -59,8 +47,6 @@ function Sidebar({ onSelectGroup,selectedGroupColor}) {
     setGroups(updatedGroups);
   };
 
-
-
   return (
     <div className="sidebar">
       <div className="sidebar-header">
@@ -71,7 +57,7 @@ function Sidebar({ onSelectGroup,selectedGroupColor}) {
         {groups.map((group, index) => (
           <li 
           key={index} 
-          className="group-item"
+          className={`group-item ${selectedGroupName === group.name ? 'selected' : ''}`}
           onClick={()=> handleGroupClick(group)}>
             <div
               className="group-icon"

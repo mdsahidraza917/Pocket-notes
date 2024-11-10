@@ -31,9 +31,15 @@ function Modal({onClose,handleCreate}) {
       onClose();
 
     }
-    const isButtonEnabled = groupName.trim() !== '' && color !== '';
+    const handleOverlayClick = (e) => {
+      if (e.target.classList.contains('modal-overlay')) {
+        onClose();
+      }
+    };
+    const isGroupNameUnique = !groups.some(group => group.name.toLowerCase() === groupName.toLowerCase());
+    const isButtonEnabled = groupName.trim() !== '' && color !== '' && isGroupNameUnique;
   return (
-    <div className='modal-overlay'>
+    <div className='modal-overlay' onClick={handleOverlayClick}>
       <div className="modal">
         <h3>Create New group</h3>
         <div className="form-group">
