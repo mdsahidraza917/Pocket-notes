@@ -25,6 +25,34 @@ function MainContent({selectedGroup,notes,addNote,selectedGroupColor}) {
     .toUpperCase();
   };
   const isButtonEnabled = newNote.trim() !== '';
+
+
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+  
+    const day = date.getDate();
+    const month = date.toLocaleString('default', { month: 'short' });
+    const year = date.getFullYear();
+  
+    let hours = date.getHours();
+    const minutes = date.getMinutes().toString().padStart(2, '0');
+    const ampm = hours >= 12 ? 'PM' : 'AM';
+  
+    hours = hours % 12 || 12; // Convert to 12-hour format
+    const time = `${hours}:${minutes} ${ampm}`;
+  
+    return `${day} ${month} ${year} `;
+  };
+  const formatTime = (dateString)=>{
+    const date = new Date(dateString);
+    let hours = date.getHours();
+    const minutes = date.getMinutes().toString().padStart(2, '0');
+    const ampm = hours >= 12 ? 'PM' : 'AM';
+  
+    hours = hours % 12 || 12; // Convert to 12-hour format
+    const time = `${hours}:${minutes} ${ampm}`;
+    return `${time}`;
+  };
   return (
 <div className="main-content-container " >
       {console.log(selectedGroup)}
@@ -44,7 +72,11 @@ function MainContent({selectedGroup,notes,addNote,selectedGroupColor}) {
             {notes.map((note, index) => (
                 <div key={index} className="note-card">
                   <p>{note.text}</p>
-                  <span className="note-date">{note.date}</span>
+                  <div className="date-time">
+                    <span className="note-date">
+                      {formatDate(note.date)}<span className="dot">•</span> {formatTime(note.date)}
+                    </span>
+                  </div>
                 </div>
               ))
              }
