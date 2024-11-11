@@ -97,3 +97,41 @@
     color: black;
     font-weight: 500;
   }
+
+  @media (max-width: 768px) {
+    .sidebar {
+        width: 100vw; /* Full width for mobile */
+        height: 100vh;
+        padding-top: 20px;
+    }
+    .sidebar-title {
+        font-size: 20px;
+    }
+    .sidebar-content {
+        padding: 15px;
+    }
+    .add-button {
+        width: 45px;
+        height: 45px;
+        bottom: 20px;
+        margin-right: 20px;
+    }
+    .add-icon {
+        width: 50px;
+        height: 50px;
+    }
+    .group-list {
+        width: 90%;
+        margin-left: 5%;
+    }
+    .group-item {
+        margin-bottom: 20px;
+    }
+    .group-icon {
+        width: 35px;
+        height: 35px;
+    }
+    .group-name {
+        font-size: 14px;
+    }
+}

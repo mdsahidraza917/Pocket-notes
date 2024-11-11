@@ -3,11 +3,15 @@ import './App.css'
 import Sidebar from './Sidebar'
 import MainContent from './MainContent'
 
+
+
 function App() {
   const [groups, setGroups] = useState([]);
   const [selectedGroup, setSelectedGroup] = useState(null);
   const [selectedGroupColor, setSelectedGroupColor] = useState(null);
   const [notes, setNotes] = useState({});
+  const [isMobile, setIsMobile] = useState(false);
+  const [showSidebar, setShowSidebar] = useState(true);
 
   const handleAddGroup = (newGroup) => {
     // Add the new group to the list of groups
@@ -19,10 +23,11 @@ function App() {
   const handleSelectGroup  = (groupName) => {
     setSelectedGroup(groupName); 
     // Update selected group
+    setShowSidebar(false); 
   };
   const handleSelectGroupColor  = (selectedGroupColor) => {
     setSelectedGroupColor(selectedGroupColor); 
-    // Update selected group
+    // Update selected group color
   };
   const handleAddNote = (newNoteText) => {
     if (!selectedGroup) return;
@@ -61,21 +66,54 @@ function App() {
     }
   }, [groups]);
 
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth <= 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+  const handleBackClick = () => setShowSidebar(true);
+
   return (
     <div className="app">
-      <Sidebar 
-      groups={groups}
-      onAddGroup={handleAddGroup}
-      onSelectGroup={handleSelectGroup}
-      selectedGroupColor={handleSelectGroupColor } />
-      <MainContent 
-      selectedGroup={selectedGroup}
-      selectedGroupColor={selectedGroupColor}
-      notes={notes[selectedGroup] || []}
-      addNote={handleAddNote}
-      />
+      {isMobile ? (
+        showSidebar ? (
+          <Sidebar 
+            groups={groups}
+            onAddGroup={handleAddGroup}
+            onSelectGroup={handleSelectGroup}
+            selectedGroupColor={handleSelectGroupColor}
+          />
+        ) : (
+          <div>
+            <MainContent
+              selectedGroup={selectedGroup}
+              selectedGroupColor={selectedGroupColor}
+              notes={notes[selectedGroup] || []}
+              addNote={handleAddNote}
+              showBackButton={isMobile && !showSidebar} // Show back button only on mobile when sidebar is hidden
+              onBackClick={handleBackClick}
+            />
+          </div>
+        )
+      ) : (
+        <>
+          <Sidebar
+            groups={groups}
+            onAddGroup={handleAddGroup}
+            onSelectGroup={handleSelectGroup}
+            selectedGroupColor={handleSelectGroupColor}
+          />
+          <MainContent
+            selectedGroup={selectedGroup}
+            selectedGroupColor={selectedGroupColor}
+            notes={notes[selectedGroup] || []}
+            addNote={handleAddNote}
+          />
+        </>
+      )}
     </div>
-  )
+  );
 }
 
 export default App

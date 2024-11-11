@@ -3,9 +3,10 @@ import './MainContent.css'
 import illustration from  '../src/assets/illustration.png'
 import lock from  '../src/assets/lock.png'
 import send from  '../src/assets/send.png'
+import back from  '../src/assets/back.png'
 
 
-function MainContent({selectedGroup,notes,addNote,selectedGroupColor}) {
+function MainContent({selectedGroup,notes,addNote,selectedGroupColor,showBackButton,onBackClick}) {
   const [newNote, setNewNote] = useState("");
 
   const handleAddNote = () => {
@@ -33,14 +34,6 @@ function MainContent({selectedGroup,notes,addNote,selectedGroupColor}) {
     const day = date.getDate();
     const month = date.toLocaleString('default', { month: 'short' });
     const year = date.getFullYear();
-  
-    let hours = date.getHours();
-    const minutes = date.getMinutes().toString().padStart(2, '0');
-    const ampm = hours >= 12 ? 'PM' : 'AM';
-  
-    hours = hours % 12 || 12; // Convert to 12-hour format
-    const time = `${hours}:${minutes} ${ampm}`;
-  
     return `${day} ${month} ${year} `;
   };
   const formatTime = (dateString)=>{
@@ -60,6 +53,11 @@ function MainContent({selectedGroup,notes,addNote,selectedGroupColor}) {
         // Display notes for the selected group
         <div className="main-content-notes">
           <div className="group-item-maincontent">
+          {showBackButton && (
+              <button className="back-button" onClick={onBackClick}>
+                <img src={back} alt="" />
+              </button>
+            )}
             <div
                 className="group-icon-maincontent"
                 style={{ backgroundColor: selectedGroupColor }}

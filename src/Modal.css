@@ -82,3 +82,36 @@ label{
   color: black;
   font-weight: 500;
 }
+
+
+
+@media (max-width: 480px) {
+  .modal {
+    width: 75vw;
+    padding: 10px;
+  }
+
+  h3 {
+    font-size: 16px;
+  }
+
+  .form-group, .color-picker, .create-button {
+    width: 100%;
+    align-items: center;
+    justify-content:center;
+  }
+
+  .groupname-input {
+    padding: 8px;
+  }
+
+  .color-swatch {
+    width: 22px;
+    height: 22px;
+  }
+
+  .create-button button {
+    padding: 8px 0;
+    font-size: 14px;
+  }
+}

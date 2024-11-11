@@ -181,4 +181,21 @@ color: #9A9A9A;
   margin-right:5px;
   /* Center-aligns the dot vertically with text */
 }
+.back-button {
+  margin-right: 10px;
+  padding: 5px 10px;
+  background-color: #001F8B;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+@media (max-width: 768px) {
+  .main-content-container {
+      width:100vw;
+  }
+  .note-input{
+    width: 100vw;
+  }
+
+}
 
